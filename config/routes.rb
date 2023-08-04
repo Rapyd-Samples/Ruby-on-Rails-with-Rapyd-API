@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :products, only: [:show] do
+      post 'create_payment', on: :member
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root "products#index"
 end

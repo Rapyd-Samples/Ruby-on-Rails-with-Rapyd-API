@@ -1,0 +1,30 @@
+<h1><%= @product.title %></h1>
+<p><%= @product.description %></p>
+<p>$<%= @product.amount %></p>
+
+<%= form_with url: create_payment_product_path, method: :post, local: true do |form| %>
+  <%= form.hidden_field :product_id, value: @product.id %>
+  <%= form.hidden_field :amount, value: @product.amount %>
+  <div class="field">
+    <%= form.label :customer_name %>
+    <%= form.text_field :customer_name, required: true %>
+  </div>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
+  <div class="actions">
+    <%= form.submit 'Buy Now' %>
+  </div>
+<% end %>
+
+<h2>Available Countries</h2>
+<% if @countries_response.present? %>
+  <ul>
+    <% @countries_response['data'].each do |country| %>
+      <li><%= country['name'] %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No countries available.</p>
+<% end %>
