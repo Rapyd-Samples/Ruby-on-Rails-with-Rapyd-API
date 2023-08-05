@@ -9,25 +9,20 @@ class ProductsController < ApplicationController
   end
 
   def create_payment
-    checkout_page = {
-      "amount": params[:payment][:amount],
-      "complete_payment_url": "http://example.com/complete",
-      "country": "US",
-      "currency": "USD",
-      "customer": "cus_9761efaa881b6edeab25e9fbfec1ddf5",
-      "error_payment_url": "http://example.com/error",
-      "merchant_reference_id": "0912-2021",
-      "language": "en",
-    }
+    @product = Product.find(params[:product_id])
+    amount = params[:amount]
+    merchant_id = params[:product_id]
 
-    response = make_raypd_request('post', '/v1/checkout', checkout_page)
+    response = create_rapyd_payment(amount, merchant_id)
 
-    if response['status'] == 'SUCCESS'
-      redirect_to response['data']['redirect_url']
+    if response['status']['status'] == 'SUCCESS'
+      puts response
+      redirect_to response['data']['redirect_url'], allow_other_host: true
     else
-      redirect_to product_path(@product), alert: 'Payment request failed'
+      puts response['status']['message']
+      flash[:alert] = 'Payment Failed'
+      redirect_to product_path(@product)
     end
-
   end
 
   private
@@ -36,4 +31,17 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def create_rapyd_payment(amount, merchant_id)
+    payment_data = {
+      "amount": amount,
+      "complete_payment_url": "http://example.com/complete",
+      "country": "US",
+      "currency": "USD",
+      "error_payment_url": "http://example.com/error",
+      "language": "en",
+      "merchant_reference_id": "product_#{merchant_id}"
+    }
+
+    RapydSignature.make_rapyd_request('post', '/v1/checkout', payment_data)
+  end
 end
