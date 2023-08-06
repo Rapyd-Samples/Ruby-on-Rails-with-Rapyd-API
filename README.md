@@ -8,16 +8,15 @@ Explore a wide range of payment methods and learn how to seamlessly integrate Ra
 
 To get started with this application, you'll need a Rapyd Account. If you don't have one yet, you can sign up at [Rapyd Dashboard](https://dashboard.rapyd.net/sign-up).
 
-### Exposing Port for Webhooks
+### Exposing Port for Rapyd Integration
 
-For proper webhook functionality, you'll need to expose the corresponding port of your computer to the outside world. By default, the application uses port 5000. You can achieve this by using tools like [ngrok](https://ngrok.com), which generates a temporary web address and redirects traffic to a specified port on your local machine.
+When integrating Rapyd into your application, it's important to note that Rapyd doesn't accept requests from localhost. To properly test and interact with Rapyd APIs, you'll need to expose the corresponding port of your computer to the outside world. By default, the application uses port 3000. To achieve this, you can use tools like [ngrok](https://ngrok.com), which generates a temporary web address and redirects traffic to a specified port on your local machine. This allows you to securely test and experience Rapyd's features within your development environment.
 
 ### Prerequisites
 
 Before running the application, make sure you have the following installed:
 
 - Ruby on Rails
-- Node.js and npm
 
 ## Running the Application
 
