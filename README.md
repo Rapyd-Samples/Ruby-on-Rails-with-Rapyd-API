@@ -13,7 +13,7 @@ Before running the application, make sure you have the following installed:
 
 ## Getting Started
 
-To get started with this application, you'll need a Rapyd Account and your API Keys. If you don't have one yet, you can sign up at [Rapyd Client Portal](https://dashboard.rapyd.net/sign-up).
+To get started with this application, you'll need a Rapyd Account and your API Keys. If you don't have one yet, you can sign up at [Rapyd Client Portal](https://dashboard.rapyd.net).
 
 ### Exposing Port for Rapyd Integration
 
